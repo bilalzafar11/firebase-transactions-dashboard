@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+
+  <!-- 🌐 Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- 🎨 Custom styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- 📊 Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- ❌ Firebase scripts are NOT needed here since they’re in script.js (as module) -->
+</head>
+<body>
+
+  <!-- 📌 Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h2>MyDashboard</h2>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
+      <li><a href="#"><i class="fas fa-user"></i> <span>Users</span></a></li>
+      <li><a href="#"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- 📄 Main Dashboard Content -->
+  <div class="main-content">
+
+    <!-- 🔝 Top Navbar -->
+    <header class="top-navbar">
+      <div class="search-box">
+        <input type="text" placeholder="Search..." />
+        <i class="fas fa-search"></i>
+      </div>
+
+      <div class="nav-icons">
+        <i class="fas fa-bell"></i>
+
+        <!-- 🌗 Theme toggle button -->
+        <button id="themeToggle" title="Toggle Theme">
+          <i class="fas fa-moon"></i>
+        </button>
+
+        <!-- 👤 Profile dropdown -->
+        <div class="profile-dropdown">
+          <img src="bz.jpg" alt="User" class="profile-img" />
+          <div class="dropdown-menu">
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- 📊 Dashboard Summary Cards -->
+    <section class="dashboard-cards">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-users"></i></div>
+        <div class="card-info">
+          <h3>Total Users</h3>
+          <p>1,250</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+        <div class="card-info">
+          <h3>Revenue</h3>
+          <p>$8,430</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div class="card-info">
+          <h3>Sales</h3>
+          <p>320</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-box"></i></div>
+        <div class="card-info">
+          <h3>Orders</h3>
+          <p>150</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📈 Charts Section -->
+    <section class="charts">
+      <div class="chart-box">
+        <h3>Sales Overview</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h3>User Devices</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </section>
+
+    <!-- 💳 Transactions Table -->
+    <section class="data-table">
+      <h3>Recent Transactions</h3>
+
+      <!-- ➕ Button to add dummy data -->
+      <button class="add-dummy-btn" id="addDummyBtn">
+        ➕ Add 100 Dummy Transactions
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ali Raza</td>
+            <td>2025-07-28</td>
+            <td>$120</td>
+            <td>Completed</td>
+          </tr>
+          <tr>
+            <td>Fatima Noor</td>
+            <td>2025-07-27</td>
+            <td>$300</td>
+            <td>Pending</td>
+          </tr>
+          <tr>
+            <td>Bilal Ahmed</td>
+            <td>2025-07-26</td>
+            <td>$500</td>
+            <td>Cancelled</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 📜 Optional: Transaction list view (not necessary if table is there) -->
+    <section id="recent-transactions">
+      <h2>Recent Transactions</h2>
+      <ul id="transaction-list"></ul>
+    </section>
+  </div>
+
+  <!-- 📦 Load main JavaScript (as module to support Firebase CDN imports) -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
