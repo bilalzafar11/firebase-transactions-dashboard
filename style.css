@@ -383,6 +383,45 @@
   }
 }
 
+/* 🔍 Filters Section Styling */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-end;
+}
+
+.filter-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+.filter-group input[type="date"],
+.filter-group select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 180px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.filter-group input[type="date"]:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+/* 🔕 Hide optional transaction list */
+.hidden-section {
+  display: none;
+}
+
 
 /* ======= DARK MODE VARIABLES ======= */
 .dark {
