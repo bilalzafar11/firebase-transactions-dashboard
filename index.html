@@ -108,53 +108,56 @@
       </div>
     </section>
 
-    <!-- 💳 Transactions Table -->
-    <section class="data-table">
-      <h3>Recent Transactions</h3>
+<!-- 💳 Transactions Table -->
+<section class="data-table">
+  <h3>Recent Transactions</h3>
 
-      <!-- ➕ Button to add dummy data -->
-      <button class="add-dummy-btn" id="addDummyBtn">
-        ➕ Add 100 Dummy Transactions
-      </button>
+  <!-- 🔍 Filters Section -->
+  <div class="filters">
+    <!-- 📅 Date Filter -->
+    <div class="filter-group">
+      <label for="date-filter">📅 Filter by Date:</label><br />
+      <input type="date" id="date-filter" />
+    </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ali Raza</td>
-            <td>2025-07-28</td>
-            <td>$120</td>
-            <td>Completed</td>
-          </tr>
-          <tr>
-            <td>Fatima Noor</td>
-            <td>2025-07-27</td>
-            <td>$300</td>
-            <td>Pending</td>
-          </tr>
-          <tr>
-            <td>Bilal Ahmed</td>
-            <td>2025-07-26</td>
-            <td>$500</td>
-            <td>Cancelled</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 📜 Optional: Transaction list view (not necessary if table is there) -->
-    <section id="recent-transactions">
-      <h2>Recent Transactions</h2>
-      <ul id="transaction-list"></ul>
-    </section>
+    <!-- 🧾 Status Filter -->
+    <div class="filter-group">
+      <label for="status-filter">📌 Filter by Status:</label><br />
+      <select id="status-filter">
+        <option value="">All</option>
+        <option value="Completed">Completed</option>
+        <option value="Pending">Pending</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+    </div>
   </div>
+
+  <!-- ➕ Button to add dummy data -->
+  <button class="add-dummy-btn" id="addDummyBtn">
+    ➕ Add Transactions
+  </button>
+
+  <!-- 🧾 Table of Transactions -->
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="transaction-table-body">
+      <!-- Table rows will be inserted dynamically using JavaScript -->
+    </tbody>
+  </table>
+</section>
+
+<!-- 📜 Optional: Transaction list view (hidden if table is shown) -->
+<section id="recent-transactions" class="hidden-section">
+  <h2>Recent Transactions</h2>
+  <ul id="transaction-list"></ul>
+</section>
 
   <!-- 📦 Load main JavaScript (as module to support Firebase CDN imports) -->
   <script type="module" src="script.js"></script>
