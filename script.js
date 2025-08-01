@@ -128,6 +128,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // 📥 Function to add 5 dummy transactions to Firestore
+// 📥 Function to add 5 dummy transactions to Firestore with random past dates
 async function addDummyTransactions() {
   console.log("✅ Adding dummy transactions...");
 
@@ -139,11 +140,16 @@ async function addDummyTransactions() {
       const randomUser = names[Math.floor(Math.random() * names.length)];
       const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
       const randomAmount = `$${Math.floor(Math.random() * 500 + 100)}`;
-      const today = new Date().toISOString().split("T")[0];
+
+      // 🔁 Generate random past date (within 7 days)
+      const daysAgo = Math.floor(Math.random() * 7); // 0–6
+      const randomDateObj = new Date();
+      randomDateObj.setDate(randomDateObj.getDate() - daysAgo);
+      const randomDate = randomDateObj.toISOString().split("T")[0];
 
       await addDoc(collection(db, "transactions"), {
         user: randomUser,
-        date: today,
+        date: randomDate,
         amount: randomAmount,
         status: randomStatus,
         timestamp: serverTimestamp()
@@ -156,6 +162,93 @@ async function addDummyTransactions() {
     alert("❌ Failed to add transactions.");
   }
 }
+
+const dateFilter = document.getElementById("date-filter");
+const statusFilter = document.getElementById("status-filter");
+
+function setupFilters() {
+  dateFilter.addEventListener("change", loadFilteredTransactions);
+  statusFilter.addEventListener("change", loadFilteredTransactions);
+  loadFilteredTransactions(); // Initial load
+}
+
+function loadFilteredTransactions() {
+  const selectedDate = dateFilter.value;
+  const selectedStatus = statusFilter.value;
+
+  const q = query(collection(db, "transactions"), orderBy("timestamp", "desc"));
+  onSnapshot(q, (snapshot) => {
+    const tableBody = document.getElementById("transaction-table-body");
+    tableBody.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+
+      let transactionDate = "-";
+      if (data.date?.toDate) {
+        transactionDate = data.date.toDate().toISOString().split("T")[0];
+      } else if (typeof data.date === "string") {
+        transactionDate = data.date;
+      }
+
+      const isDateMatch = !selectedDate || transactionDate === selectedDate;
+      const isStatusMatch = !selectedStatus || data.status === selectedStatus;
+
+      if (isDateMatch && isStatusMatch) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${data.user || data.name || "-"}</td>
+          <td>${transactionDate}</td>
+          <td>${data.amount || "-"}</td>
+          <td>${data.status || "-"}</td>
+        `;
+        tableBody.appendChild(row);
+      }
+    });
+  });
+}
+
+setupFilters(); // 👈 required to activate filtering
+
+
+function loadTransactions() {
+  db.collection("transactions").onSnapshot((snapshot) => {
+    const tableBody = document.getElementById("transaction-table-body");
+    tableBody.innerHTML = ""; // Clear previous rows
+
+    snapshot.docs.forEach((doc) => {
+      const data = doc.data();
+
+      const selectedDate = dateFilter.value;
+      const selectedStatus = statusFilter.value;
+
+      const transactionDate = data.date?.toDate?.().toISOString().split("T")[0];
+
+      const isDateMatch = !selectedDate || transactionDate === selectedDate;
+      const isStatusMatch = !selectedStatus || data.status === selectedStatus;
+
+      if (isDateMatch && isStatusMatch) {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${data.name}</td>
+          <td>${transactionDate}</td>
+          <td>$${data.amount}</td>
+          <td>${data.status}</td>
+        `;
+
+        tableBody.appendChild(row);
+      }
+    });
+  });
+}
+
+dateFilter.addEventListener("change", loadTransactions);
+statusFilter.addEventListener("change", loadTransactions);
+
+// Load on page ready
+loadTransactions();
+
 
 // 🌍 Make the function available globally (for testing if needed)
 window.addDummyTransactions = addDummyTransactions;
