@@ -197,8 +197,20 @@
   #themeToggle i {
     pointer-events: none;
   }
-  
-  
+
+/* 🌙 Dark Mode Styles */
+body.dark-mode .filters label {
+  color: #e0e0e0; /* Light label color for dark background */
+}
+
+body.dark-mode .filters input[type="date"] {
+  background-color: #333;     
+  color: #fff;               
+  border: 1px solid #555;    
+
+body.dark-mode .filters input[type="date"]::placeholder {
+  color: #aaa;
+}
   
   /* ========== DASHBOARD CARDS ========== */
   .dashboard-cards {
@@ -660,3 +672,4 @@
     }
   }
   
+
