@@ -5,8 +5,6 @@ This project simulates real-time transaction management with interactive charts,
 
 🔗 **Live Demo:** [Click to View](https://bilalzafar11.github.io/firebase-transactions-dashboard/)  
 
----
-
 ## 📌 Features
 
 - ✅ Firebase Firestore Integration (via CDN)
@@ -39,10 +37,3 @@ This project simulates real-time transaction management with interactive charts,
 
 Developed by [Muhammad Bilal Zafar](mailto:bilalzafar7350@gmail.com)  
 Intern @ High Tech Software House & Training Center
-
----
-
-## 📌 Note
-
-This is a front-end focused demo with Firebase as backend. Payments and authentication are not included in this version.
-
