@@ -2,7 +2,7 @@
 
 A modern, responsive **Admin Dashboard** built with **HTML, CSS, JavaScript**, and **Firebase Firestore**. This project is designed to display transactions in real-time, simulate CRUD operations, and offer insightful data visuals — perfect for learning and internships.
 
-🌐 **Live Demo**: [Click to View](https://bilalzafar11.github.io/Transactions/)  
+🌐 **Live Demo**: [Click to View](https://bilalzafar11.github.io/firebase-transactions-dashboard/)  
 
 
 ## 📌 Features
